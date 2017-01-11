@@ -43,7 +43,7 @@ $ git checkout git+https://github.com/paxos-bankchain/dsert.git && cd dsert
 
 Install locally
 ```bash
-pip install --editable
+$ pip install --editable .
 ```
 
 Confirm tests pass:
