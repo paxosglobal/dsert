@@ -1,7 +1,12 @@
 language: python
 python:
-  - "2.7.13"
-  - "3.6.0"
+  - "2.7"  # self.assertRaises in tests is not python2.6 compatible
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "nightly" # currently points to 3.7-dev
 install: pip install .
 notifications:
   email:

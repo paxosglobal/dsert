@@ -140,7 +140,7 @@ class TestAdvancedUsage(TestCase):
 
     # Errors
 
-    def test_exact_match_plus_extra_unknowns_should_fail(self):
+    def test_exact_match_plus_extra_unknowns_should_raise_an_error(self):
         with self.assertRaises(TypeError):
             assert_valid_dict(
                 to_validate=self.advanced_dict,
@@ -148,7 +148,7 @@ class TestAdvancedUsage(TestCase):
                 unknown_contents={'foo': 'bar'},
             )
 
-    def test_exact_match_plus_extra_excludes_should_fail(self):
+    def test_exact_match_plus_extra_excludes_should_raise_an_error(self):
         with self.assertRaises(KeyError):
             assert_valid_dict(
                 to_validate=self.advanced_dict,
@@ -156,14 +156,14 @@ class TestAdvancedUsage(TestCase):
                 excluded_fields=['foo'],
             )
 
-    def test_missing_key_should_fail(self):
+    def test_missing_key_should_raise_an_error(self):
         with self.assertRaises(KeyError):
             assert_valid_dict(
                 to_validate=self.advanced_dict,
                 known_contents={'temp': 98.6},
             )
 
-    def test_incorrect_value_should_fail(self):
+    def test_incorrect_value_should_raise_an_error(self):
         with self.assertRaises(ValueError):
             assert_valid_dict(
                 to_validate=self.advanced_dict,
