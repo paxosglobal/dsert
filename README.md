@@ -2,7 +2,7 @@
 
 Library to test *all* the fields of a python dictionary
 
-[![Build Status](https://travis-ci.com/paxos-bankchain/dsert.svg?branch=master)](https://travis-ci.com/paxos-bankchain/dsert)
+[![Build Status](https://travis-ci.org/paxos-bankchain/dsert.svg?branch=master)](https://travis-ci.org/paxos-bankchain/dsert)
 
 ## Install
 
