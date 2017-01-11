@@ -18,17 +18,19 @@ def assert_valid_dict(to_validate, known_contents={}, unknown_contents={}, exclu
     # Be sure we're not missing any fields
     to_validate_keys_set = set(to_validate.keys())
     known_contents_set = set(known_contents.keys())
-    required_fields_set = set(unknown_contents.keys())
+    unknown_fields_set = set(unknown_contents.keys())
     excluded_fields_set = set(excluded_fields)
-    missing_keys_set = to_validate_keys_set - required_fields_set - excluded_fields_set - known_contents_set
+    missing_keys_set = to_validate_keys_set - unknown_fields_set - excluded_fields_set - known_contents_set
     if missing_keys_set:
         err_msg = 'Keys for {missing_keys_dict} not in '
-        err_msg += '{required_fields} nor {excluded_fields} nor {known_contents_set}'
+        err_msg += 'known_contents keys ({known_contents}), '
+        err_msg += 'unknown_contents keys ({unknown_contents}), '
+        err_msg += 'nor excluded_fields ({excluded_fields}).'
         err_msg = err_msg.format(
             missing_keys_dict={x: to_validate[x] for x in missing_keys_set},
-            required_fields=required_fields_set,
-            excluded_fields=excluded_fields_set,
-            known_contents_set=known_contents_set,
+            known_contents=list(known_contents_set),
+            unknown_contents=list(unknown_fields_set),
+            excluded_fields=list(excluded_fields_set),
         )
         raise KeyError(err_msg)
 
