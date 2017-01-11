@@ -1,9 +1,8 @@
 from distutils.core import setup
-import dsert
 
 setup(
     name='subconscious',
-    version=dsert.__version__,
+    version='0.1.0',
     url='',
     license='',
     author='paxosdev',

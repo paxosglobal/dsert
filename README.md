@@ -9,7 +9,8 @@ Library to test *all* the fields of a python dictionary
 ```bash
 $ pip install git+https://github.com/paxos-bankchain/dsert.git
 ```
-# TODO: pypi support
+
+TODO: pypi support
 
 
 ## Contributing
