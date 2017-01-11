@@ -34,6 +34,18 @@ Traceback (most recent call last):
 KeyError: "Keys for {'good_credit': True, 'property': 'homeowner'} not in known_contents keys (['balance']), unknown_contents keys ([]), nor excluded_fields ([])."
 ```
 
+## Why
+
+Most tests are opt-in, where we test certain keys/values only:
+```python
+>>> self.assertEqual(some_dict['a'], 1)
+```
+
+This can work well, but it can also cause situations where the tests pass and yet a bug has slipped in!
+
+From [The Zen of Python](https://www.python.org/dev/peps/pep-0020/)
+> Explicit is better than implicit.
+
 ## Contributing
 
 Check out repo:
