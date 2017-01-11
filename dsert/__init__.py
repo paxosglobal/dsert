@@ -27,7 +27,8 @@ def assert_valid_dict(to_validate, known_contents={}, unknown_contents={}, exclu
         err_msg += 'unknown_contents keys ({unknown_contents}), '
         err_msg += 'nor excluded_fields ({excluded_fields}).'
         err_msg = err_msg.format(
-            missing_keys_dict={x: to_validate[x] for x in missing_keys_set},
+            # python 2.6 doesn't allow set comprehensions
+            missing_keys_dict=dict((x, to_validate[x]) for x in missing_keys_set),
             known_contents=list(known_contents_set),
             unknown_contents=list(unknown_fields_set),
             excluded_fields=list(excluded_fields_set),
