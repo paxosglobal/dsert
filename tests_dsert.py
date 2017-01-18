@@ -36,24 +36,24 @@ class TestKnownContents(BasicTestCase):
 class TestUnknownContents(BasicTestCase):
 
     def test_correct_types_should_not_raise_an_error(self):
-        assert_valid_dict(to_validate=self.basic_dict, unknown_contents={'foo': str})
+        assert_valid_dict(to_validate=self.basic_dict, known_types={'foo': str})
 
     def test_missing_type_should_raise_an_error(self):
         with self.assertRaises(KeyError):
-            assert_valid_dict(to_validate=self.basic_dict, unknown_contents={})
+            assert_valid_dict(to_validate=self.basic_dict, known_types={})
 
     def test_incorrect_type_should_raise_an_error(self):
         with self.assertRaises(ValueError):
             assert_valid_dict(
                 to_validate=self.basic_dict,
-                unknown_contents={'foo': int},
+                known_types={'foo': int},
             )
 
     def test_extra_type_should_raise_an_error(self):
         with self.assertRaises(KeyError):
             assert_valid_dict(
                 to_validate=self.basic_dict,
-                unknown_contents={'foo': str, 'snap': str}
+                known_types={'foo': str, 'snap': str}
             )
 
 
@@ -100,20 +100,20 @@ class TestAdvancedUsage(TestCase):
         assert_valid_dict(
             to_validate=self.advanced_dict,
             known_contents={'temp': 98.6, 'color': 'red'},
-            unknown_contents={'healthy': bool},
+            known_types={'healthy': bool},
         )
 
     def test_mostly_unknown_match_should_succeed(self):
         assert_valid_dict(
             to_validate=self.advanced_dict,
             known_contents={'temp': 98.6},
-            unknown_contents={'color': str, 'healthy': bool},
+            known_types={'color': str, 'healthy': bool},
         )
 
     def test_entirely_unknown_match_should_succeed(self):
         assert_valid_dict(
             to_validate=self.advanced_dict,
-            unknown_contents={'color': str, 'healthy': bool, 'temp': float},
+            known_types={'color': str, 'healthy': bool, 'temp': float},
         )
 
     # Exclude:
@@ -145,7 +145,7 @@ class TestAdvancedUsage(TestCase):
             assert_valid_dict(
                 to_validate=self.advanced_dict,
                 known_contents=self.advanced_dict,
-                unknown_contents={'foo': 'bar'},
+                known_types={'foo': 'bar'},
             )
 
     def test_exact_match_plus_extra_excludes_should_raise_an_error(self):
