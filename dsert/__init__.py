@@ -1,35 +1,35 @@
 
-def assert_valid_dict(to_validate, known_contents={}, unknown_contents={}, excluded_fields=[]):
+def assert_valid_dict(to_validate, known_contents={}, known_types={}, excluded_fields=[]):
     """
     Take a dict to_validate and validate all known known + unknown fields,
     while skipping any excluded_fields
 
     Details of inputs:
       - known_contents is a dict with the exact key/value pairs expected in to_validate
-      - unknown_contents is a dict of the exact key combined with the *type* of value that is expected
+      - known_types is a dict of the exact key combined with the *type* of value that is expected
       - excluded fields is a list of the fields who value type is unknown
 
     """
     assert type(to_validate) is dict, to_validate
     assert type(known_contents) is dict, known_contents
-    assert type(unknown_contents) is dict, unknown_contents
+    assert type(known_types) is dict, known_types
     assert type(excluded_fields) in (list, set, tuple), excluded_fields
 
     # Be sure we're not missing any fields
     to_validate_keys_set = set(to_validate.keys())
     known_contents_set = set(known_contents.keys())
-    unknown_fields_set = set(unknown_contents.keys())
+    unknown_fields_set = set(known_types.keys())
     excluded_fields_set = set(excluded_fields)
     missing_keys_set = to_validate_keys_set - unknown_fields_set - excluded_fields_set - known_contents_set
     if missing_keys_set:
         err_msg = 'Keys for {missing_keys_dict} not in '
         err_msg += 'known_contents keys ({known_contents}), '
-        err_msg += 'unknown_contents keys ({unknown_contents}), '
+        err_msg += 'known_types keys ({known_types}), '
         err_msg += 'nor excluded_fields ({excluded_fields}).'
         err_msg = err_msg.format(
             missing_keys_dict={x: to_validate[x] for x in missing_keys_set},
             known_contents=list(known_contents_set),
-            unknown_contents=list(unknown_fields_set),
+            known_types=list(unknown_fields_set),
             excluded_fields=list(excluded_fields_set),
         )
         raise KeyError(err_msg)
@@ -65,7 +65,7 @@ def assert_valid_dict(to_validate, known_contents={}, unknown_contents={}, exclu
             raise ValueError(err_msg)
 
     # Be sure the fields we don't know are of the correct types
-    for field_to_return, field_type in unknown_contents.items():
+    for field_to_return, field_type in known_types.items():
 
         # required fields must be a type (TODO: support more general plugins)
         if type(field_type) is not type:
@@ -86,11 +86,11 @@ def assert_valid_dict(to_validate, known_contents={}, unknown_contents={}, exclu
             raise ValueError(err_msg)
 
 
-def assert_valid_fields(dict_to_validate, known_fields_dict={},
-                        unknown_field_mappings={}, fields_not_required=[]):
+def assert_valid_fields(dict_to_validate, known_contents={},
+                        unknown_contents={}, fields_not_required=[]):
     return assert_valid_dict(
         to_validate=dict_to_validate,
         known_contents=known_fields_dict,
-        unknown_contents=unknown_field_mappings,
+        known_types=unknown_contents,
         excluded_fields=fields_not_required,
     )

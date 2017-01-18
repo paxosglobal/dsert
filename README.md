@@ -20,7 +20,7 @@ TODO: pypi support
 
 Check all the fields (will return `None`):
 ```python
->>> assert_valid_dict(my_dict, known_contents={'balance': 123.45}, unknown_contents={'property': str}, excluded_fields=['good_credit'])
+>>> assert_valid_dict(my_dict, known_contents={'balance': 123.45}, known_types={'property': str}, excluded_fields=['good_credit'])
 >>>
 ```
 
@@ -31,7 +31,7 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "dsert/__init__.py", line 35, in assert_valid_dict
     raise KeyError(err_msg)
-KeyError: "Keys for {'good_credit': True, 'property': 'homeowner'} not in known_contents keys (['balance']), unknown_contents keys ([]), nor excluded_fields ([])."
+KeyError: "Keys for {'good_credit': True, 'property': 'homeowner'} not in known_contents keys (['balance']), known_types keys ([]), nor excluded_fields ([])."
 ```
 
 ## Why
