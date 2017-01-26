@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(
-    name='subconscious',
+    name='dsert',
     version='0.1.0',
     url='',
     license='',
