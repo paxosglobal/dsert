@@ -14,3 +14,4 @@ notifications:
     on_failure: change
 script:
   - nosetests .
+  - pip install flake8 && flake8 .

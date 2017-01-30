@@ -86,7 +86,7 @@ def assert_valid_dict(to_validate, known_contents={}, known_types={}, excluded_f
             raise ValueError(err_msg)
 
 
-def assert_valid_fields(dict_to_validate, known_contents={},
+def assert_valid_fields(dict_to_validate, known_fields_dict={},
                         unknown_contents={}, fields_not_required=[]):
     return assert_valid_dict(
         to_validate=dict_to_validate,
