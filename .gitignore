@@ -2,3 +2,5 @@
 .coverage
 dist/
 tests/__pycache__/
+*.egg-info
+MANIFEST*
