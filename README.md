@@ -7,9 +7,8 @@ Library to explicitly test *all* the fields of a python dictionary, even when yo
 ## Install
 
 ```bash
-$ pip install git+https://github.com/paxos-bankchain/dsert.git
+$ pip install dsert
 ```
-TODO: pypi support
 
 ## Examples
 
@@ -67,6 +66,51 @@ $ nosetests .
 Make your changes and confirm that tests still pass:
 ```
 $ nosetests .
+```
+
+## Updating PyPi
+
+You must have the credentials in order to push updates to [PyPi](https://pypi.python.org/pypi).
+
+Create a `.pypirc` file in your home directory:
+```
+$ cat ~/.pypirc
+[distutils]
+index-servers=
+    pypi
+
+[pypi]
+repository = https://pypi.python.org/pypi
+username = <your user name goes here>
+password = <your password goes here>
+```
+
+Install twine:
+```
+$ pip install twine
+```
+
+Create a distribution:
+```
+$ python setup.py sdist bdist_wheel
+```
+
+Push your distribution to PyPi:
+```
+$ twine upload dist/* -r pypi
+```
+
+To test this process, you can use [PyPi's test server](https://testpypi.python.org/). Add an entry to `.pypirc` that looks like this with whatever creds you create for testpypi:
+```
+[testpypi]
+repository = https://testpypi.python.org/pypi
+username = <your user name goes here>
+password = <your password goes here>
+```
+
+Then use the following command to push your distrobution to test PyPi:
+```
+$ twine upload dist/* -r testpypi
 ```
 
 ## Coming Soon
