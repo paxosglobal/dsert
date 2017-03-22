@@ -6,20 +6,26 @@ Library to explicitly test *all* the fields of a python dictionary, even when yo
 
 ## Install
 
+From [PyPi](https://pypi.python.org/pypi/dsert/):
 ```bash
 $ pip install dsert
+```
+
+From [GitHub](https://github.com/paxos-bankchain/dsert/):
+```bash
+$ pip install git+https://github.com/paxos-bankchain/dsert.git
 ```
 
 ## Examples
 
 ```python
 >>> from dsert import assert_valid_dict
->>> my_dict = {'balance': 123.45, 'property': 'homeowner', 'good_credit': True}
+>>> my_dict = {'balance': 123.45, 'status': 'homeowner', 'good_credit': True}
 ```
 
 Check all the fields (will return `None`):
 ```python
->>> assert_valid_dict(my_dict, known_contents={'balance': 123.45}, known_types={'property': str}, excluded_fields=['good_credit'])
+>>> assert_valid_dict(my_dict, known_contents={'balance': 123.45}, known_types={'status': str, 'good_credit': bool})
 >>>
 ```
 
@@ -30,7 +36,7 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "dsert/__init__.py", line 35, in assert_valid_dict
     raise KeyError(err_msg)
-KeyError: "Keys for {'good_credit': True, 'property': 'homeowner'} not in known_contents keys (['balance']), known_types keys ([]), nor excluded_fields ([])."
+KeyError: "Keys for {'good_credit': True, 'status': 'homeowner'} not in known_contents keys (['balance']), known_types keys ([]), nor excluded_fields ([])."
 ```
 
 ## Why
@@ -44,6 +50,10 @@ This can work well, but it can also cause situations where the tests pass and ye
 
 From [The Zen of Python](https://www.python.org/dev/peps/pep-0020/)
 > Explicit is better than implicit.
+
+## Coming Soon
+
+More complex validators. Don't just test that a dictionary value is of type `int`, test that it's a positive/even/prime `int`.
 
 ## Contributing
 
@@ -81,8 +91,8 @@ index-servers=
 
 [pypi]
 repository = https://pypi.python.org/pypi
-username = <your user name goes here>
-password = <your password goes here>
+username = paxos
+password = <password goes here>
 ```
 
 Install twine:
@@ -112,7 +122,3 @@ Then use the following command to push your distrobution to test PyPi:
 ```
 $ twine upload dist/* -r testpypi
 ```
-
-## Coming Soon
-
-More complex validators. Don't just test that a dictionary value is of type `int`, test that it's a positive/even/prime `int`.
