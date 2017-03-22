@@ -62,7 +62,7 @@ Confirm tests pass:
 ```
 $ nosetests .
 ```
-(this requires having [nose](http://nose.readthedocs.io/en/latest/]) installed)
+(this requires having [nose](http://nose.readthedocs.io/en/latest/) installed)
 
 Make your changes and confirm that tests still pass:
 ```
